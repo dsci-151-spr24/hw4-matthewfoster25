@@ -201,6 +201,27 @@ The Average Area under the **ROC** Curve was 0.534.
     -   perform cross validation, and
     -   report the average area under the ROC curve and the accuracy for all cross validation folds `collect_metrics()`.
 
+```{r}
+#| label: question_9
+#| eval: true
+
+gss16_rec_2 <- recipe(advfront ~ polviews + educ, data = gss16_train) %>%
+  step_other(polviews, threshold = 0.10, other = "Other") %>%
+  step_dummy(all_nominal(), -all_outcomes())
+
+gss16_wflow_2 <- workflow() %>%
+  add_model(gss16_spec) %>%
+  add_recipe(gss16_rec_2)
+
+set.seed(1116)
+gss16_folds <- vfold_cv(gss16_train, v = 5)
+
+gss16_fit_rs_2 <- gss16_wflow_2 %>%
+  fit_resamples(resamples = gss16_folds)
+
+collect_metrics(gss16_fit_rs_2)
+```
+
 10. Comment on which model performs better (one including `wrkstat`, model 1, or the one excluding `wrkstat`, model 2) on the training data based on area under the ROC curve.
 
 11. Fit both models to the testing data, plot the ROC curves for the predictions for both models, and calculate the areas under the ROC curve.
