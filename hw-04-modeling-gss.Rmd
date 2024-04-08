@@ -222,7 +222,16 @@ gss16_fit_rs_2 <- gss16_wflow_2 %>%
 collect_metrics(gss16_fit_rs_2)
 ```
 
+**Answer:**
+
+The Average Accuracy of the 5-fold cross validation was 0.595.
+
+The Average Area under the **ROC** Curve was 0.529.
+
 10. Comment on which model performs better (one including `wrkstat`, model 1, or the one excluding `wrkstat`, model 2) on the training data based on area under the ROC curve.
+
+**Answer:**
+The metrics provided above show that the **ROC** curve for Model 1 is 0.534 while the **ROC** curve for Model 2 is 0.529. Based on this, Model 1 is the preferable model for training data.
 
 11. Fit both models to the testing data, plot the ROC curves for the predictions for both models, and calculate the areas under the ROC curve.
     Does your answer to the previous exercise hold for the testing data as well?
