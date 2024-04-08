@@ -280,12 +280,7 @@ This subset shows that 1136 of the responses were no while 237 were yes.
 
 13. Describe how bootstrapping can be used to estimate the proportion of Americans who have been harassed by their superiors or co-workers at their job.
 
-```{r}
-#| label: question_13
-#| eval: true
-
-
-```
+**Answer:** Bootstrapping can help determine the estimated proportion of Americans who have been harassed at work by showing averages that can be applied to the greater American population.
 
 14. Calculate a 95% bootstrap confidence interval for the proportion of Americans who have been harassed by their superiors or co-workers at their job. Interpret this interval in context of the data.
 
@@ -293,16 +288,31 @@ This subset shows that 1136 of the responses were no while 237 were yes.
 #| label: question_14
 #| eval: true
 
+harassment_data <- filter(gss16, !is.na(harass5) & harass5 %in% c("Yes", "No"))
 
+num_bootstraps <- 1000
+
+calculate_proportion <- function(data) {
+  return(sum(data == "Yes") / length(data))
+}
+
+set.seed(1116)
+bootstrap_proportions <- replicate(num_bootstraps, {
+  sample_data <- sample(harassment_data$harass5, replace = TRUE)
+  calculate_proportion(sample_data)
+})
+
+confidence_interval <- quantile(bootstrap_proportions, c(0.025, 0.975))
+
+confidence_interval
 ```
+
+**Answer:**
+After bootstrapping, the data shows that with 97.5% confidence, 19.37% of Americans are harassed at work. However, with 2.5% confidence, this percentage could be as low as 15.44%.
 
 15. Would you expect a 90% confidence interval to be wider or narrower than the interval you calculated above? Explain your reasoning.
 
-```{r}
-#| label: question_15
-#| eval: true
-
-
-```
+**Answer:**
+With a 90% confidence interval it could be expected that it would be narrower than the prior interval. This is because, a higher confidence level requires a wider interval and risks more uncertainty. The 90% interval looks at a smaller and narrower percentage of people than the prior.
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*
