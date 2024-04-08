@@ -1,5 +1,6 @@
 ---
 title: "HW 04 - Modeling the GSS"
+author: "Matthew Foster"
 output: html_document
 ---
 
@@ -37,6 +38,11 @@ If anything is missing, commit and push again.
 We'll use the **tidyverse** package for much of the data wrangling and visualisation, the **tidymodels** package for modeling and inference, and the data lives in the **dsbox** package.
 These packages are already installed for you.
 You can load them by running the following in your Console:
+
+```{r, message = FALSE, eval = TRUE}
+install.packages("devtools")
+devtools::install_github("tidyverse/dsbox")
+```
 
 ```{r load-packages, message = FALSE, eval = TRUE}
 library(tidyverse)
