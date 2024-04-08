@@ -231,19 +231,23 @@ The Average Area under the **ROC** Curve was 0.529.
 10. Comment on which model performs better (one including `wrkstat`, model 1, or the one excluding `wrkstat`, model 2) on the training data based on area under the ROC curve.
 
 **Answer:**
-The metrics provided above show that the **ROC** curve for Model 1 is 0.534 while the **ROC** curve for Model 2 is 0.529. Based on this, Model 1 is the preferable model for training data.
+The metrics provided above show that the **ROC** curve for Model 1 is 0.534 while the **ROC** curve for Model 2 is 0.529. Based on this, Model 1 is the preferable model for training.
 
 11. Fit both models to the testing data, plot the ROC curves for the predictions for both models, and calculate the areas under the ROC curve.
     Does your answer to the previous exercise hold for the testing data as well?
     Explain your reasoning.
     Note: If you haven't yet done so, you'll need to first train your workflows on the training data with the following, and then use these fit objects to calculate predictions for the test data.
 
-```{r eval=FALSE}
+```{r}
+#| label: question_11
+#| eval: true
+
 gss16_fit_1 <- gss16_wflow_1 %>%
   fit(gss16_train)
 
 gss16_fit_2 <- gss16_wflow_2 %>%
   fit(gss16_train)
+
 ```
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
@@ -258,8 +262,47 @@ The question is phrased as the following.
 Answers to this question are stored in the `harass5` variable in our dataset.
 
 12. Create a subset of the data that only contains `Yes` and `No` answers for the harassment question. How many responses chose each of these answers?
+
+```{r}
+#| label: question_12
+#| eval: true
+
+harass_subset <- gss16 %>%
+  filter(harass5 %in% c("Yes", "No"))
+
+count_responses <- count(harass_subset, harass5)
+
+count_responses
+```
+
+**Answer:**
+This subset shows that 1136 of the responses were no while 237 were yes.
+
 13. Describe how bootstrapping can be used to estimate the proportion of Americans who have been harassed by their superiors or co-workers at their job.
+
+```{r}
+#| label: question_13
+#| eval: true
+
+
+```
+
 14. Calculate a 95% bootstrap confidence interval for the proportion of Americans who have been harassed by their superiors or co-workers at their job. Interpret this interval in context of the data.
+
+```{r}
+#| label: question_14
+#| eval: true
+
+
+```
+
 15. Would you expect a 90% confidence interval to be wider or narrower than the interval you calculated above? Explain your reasoning.
+
+```{r}
+#| label: question_15
+#| eval: true
+
+
+```
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*
