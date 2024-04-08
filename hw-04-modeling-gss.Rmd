@@ -48,6 +48,7 @@ devtools::install_github("tidyverse/dsbox")
 library(tidyverse)
 library(tidymodels)
 library(dsbox)
+library(dplyr)
 ```
 
 ## Data
@@ -76,6 +77,23 @@ It's important that you don't recode the NAs, just the remaining levels.
 ```{marginfigure}
 You can do this in various ways. One option is to use the `str_detect()` function to detect the existence of words like liberal or conservative. Note that these sometimes show up with lowercase first letters and sometimes with upper case first letters. To detect either in the `str_detect()` function, you can use "[Ll]iberal" and "[Cc]onservative". But feel free to solve the problem however you like, this is just one option!
 ```
+
+```{r}
+#| label: question_1
+#| eval: true
+
+gss16 <- gss16 %>%
+  mutate(advfront = case_when(
+    str_detect(advfront, "(?i)^(Strongly agree|Agree)$") ~ "agree",
+    TRUE ~ "Not agree"
+  ))
+
+gss16$advfront <- factor(gss16$advfront, levels = c("agree", "Not agree"))
+
+count(gss16, advfront)
+```
+
+**Answer:** Using the `count()` function the new levels are 1159 agreeing and 1708 disagreeing.
 
 2.  Combine the levels of the `polviews` variable such that levels that have the word "liberal" in them are lumped into a level called `"Liberal"` and those that have the word conservative in them are lumped into a level called `"Conservative"`. Then, re-order the levels in the following order: `"Conservative"` , `"Moderate"`, and `"Liberal"`. Finally, `count()` how many times each new level appears in the `polviews` variable.
 3.  Create a new data frame called `gss16_advfront` that includes the variables `advfront`, `educ`, `polviews`, and `wrkstat`. Then, use the `drop_na()` function to remove rows that contain `NA`s from this new data frame. Sample code is provided below.
