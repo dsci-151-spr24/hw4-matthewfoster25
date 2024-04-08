@@ -149,16 +149,16 @@ gss16_rec_1 <- recipe(advfront ~ polviews + wrkstat + educ, data = gss16_train) 
 6.  Specify a logistic regression model using `"glm"` as the engine. Name this specification `gss16_spec`. Sample code is provided below.
 
 ```{r eval=FALSE}
-gss16_spec <- ___() %>%
-  set_engine("___")
+gss16_spec <- logistic_reg() %>%
+  set_engine("glm")
 ```
 
 7.  Build a workflow that uses the recipe you defined (`gss16_rec`) and the model you specified (`gss16_spec`). Name this workflow `gss16_wflow_1`. Sample code is provided below.
 
 ```{r eval=FALSE}
 gss16_wflow_1 <- workflow() %>%
-  add_model(___) %>%
-  add_recipe(___)
+  add_model(gss16_spec) %>%
+  add_recipe(gss16_rec_1)
 ```
 
 8.  Perform 5-fold cross validation.
