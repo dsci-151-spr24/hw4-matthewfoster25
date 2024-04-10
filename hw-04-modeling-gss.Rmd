@@ -238,17 +238,17 @@ The metrics provided above show that the **ROC** curve for Model 1 is 0.534 whil
     Explain your reasoning.
     Note: If you haven't yet done so, you'll need to first train your workflows on the training data with the following, and then use these fit objects to calculate predictions for the test data.
 
-```{r}
-#| label: question_11
-#| eval: true
+**Answer:**
 
-gss16_fit_1 <- gss16_wflow_1 %>%
-  fit(gss16_train)
+I am repeatedly getting this message as I try to answer Question 11...
 
-gss16_fit_2 <- gss16_wflow_2 %>%
-  fit(gss16_train)
+> Error in `roc_curve()`:
+! Can't select columns that don't exist.
+✖ Columns `agree`, `Not agree`, `Not agree`, `Not agree`, `agree`, etc. don't exist.
+Run `rlang::last_trace()` to see where the error occurred.
 
-```
+After spending 2 and a half hours on this and looking for any solution on the internet. I believe it is in my best interest to skip this question. Thank you for your understanding!
+
 
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
